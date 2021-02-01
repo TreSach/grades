@@ -41,3 +41,8 @@ class Student
             grades = 'F'
     end
 end
+
+# Create some sample objects
+a.Student.new("Kevin", "Green")
+b.Student.new("Jane", "Tolbert")
+c.Student.new("Michael", "Lagoon")
