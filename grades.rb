@@ -13,53 +13,24 @@
 
 
 class Student
-    @@class_grade = 0
+    
+
 # Initialize a class that gets student grades
-    def initialize(fname, lname)   #initialize(fname, lname, grades, class_grade, lgrade)
+    def initialize(fname, lname)   
         @firstname = fname
         @lastname = lname
-        @grades = Array.new # Creates a new array that will later add all grade points then convert to a final class grade.
+        @grades = []    # Array.new     # Creates a new array that will later add all grade points then convert to a final class grade.
     end
 
-# Sample Objects works if I defined methods below. Is there a way to simplify this?
+# NOTE: attr_accessor is a shortcut for defining methods. It uses both reader and writer methods together
 
-    def firstname
-        @firstname
-    end
-
-    def firstname=(fname)
-        @firstname = fname
-    end
-
-    def lastname
-        @lastname
-    end
-
-    def lastname=(lname)
-        @lastname = lname
-    end
-
-    def class_grade
-        @class_grade
-    end
-
-    def class_grade=(class_grade)
-        @class_grade = class_grade
-    end
-
-    def lgrade
-        @lgrade
-    end
-
-    def lgrade=(lgrade)
-        @lgrade = lgrade
-    end
+attr_accessor :firstname, :lastname, :class_grade, :lgrade
 
 
 # Add all grades before calculating the Grade Average; round up to the nearest whole number
 
    def sumGrade(point)
-    # point = grades.round(point) # Rounds up to the nearest whole number
+   
      if point.is_a?(Integer)
         @grades.push(point)
         finalGrade
@@ -88,7 +59,7 @@ class Student
     def setFinalgrade
         if @class_grade >= 90
             @lgrade = 'A'
-        elsif @class_grade >= 80 # 'elseif' statement is no longer valid. use 'elsif' to replace it
+        elsif @class_grade >= 80    # 'elseif' statement is no longer valid. use 'elsif' to replace it
             @lgrade = 'B'
         elsif @class_grade >= 70
             @lgrade = 'C'
@@ -97,7 +68,7 @@ class Student
         else
             @lgrade = 'F'
     end
-end
+
 end
 
 # Create some sample objects
@@ -105,10 +76,29 @@ a = Student.new("Kevin", "Green")
 b = Student.new("Jane", "Tolbert")
 c = Student.new("Michael", "Lagoon")
 
-# Testing Object 'a'
+# Testing Object 'a, b, and c'
 a.sumGrade(85)
 a.sumGrade(93)
-a.sumGrade(63)
+a.sumGrade(61)
 
-puts "Student name: " + a.firstname + " " + a.lastname + " => Class Grade:  " + a.class_grade.to_s + " " + a.lgrade
-# Output: Student name: Kevin Green => Class Grade: 90 A
+b.sumGrade(70)
+b.sumGrade(98)
+b.sumGrade(81)
+
+c.sumGrade(80)
+c.sumGrade(50)
+c.sumGrade(72)
+
+# NOTE: Figure out to create multi-dimensional array and iterate for each student info
+
+studentList = [a, b, c]
+
+studentList.each do |m|
+ puts "Student name: " + m.firstname + " " + m.lastname + " " +  " => Class Grade:  " + m.class_grade.to_s + " " + m.lgrade
+end
+
+end
+# puts "Student name: " + a.firstname + " " + a.lastname + " => Class Grade:  " + a.class_grade.to_s + " " + a.lgrade
+# Output: Student name: Kevin Green => Class Grade: 79 C
+# Output: Student name: Jane Tolbert => Class Grade: 83 B
+# Output: Student name: Michael Lagoon => Class Grade: 67 D
